@@ -5,6 +5,8 @@ class Contest < ActiveRecord::Base
   validates :name, length: {maximum: 140}, presence: true, uniqueness: true
   validates :description, length: { maximum: 1000 } , presence: true
   validates :url, length: { maximum: 140 } , presence: true
+  validates :startdate, presence: true, date: { after_or_equal_to: Proc.new { Date.today }, message: "must be at least #{(Date.today + 1).to_s}" }, on: :create
+  validates :enddate, presence: true, date: { :after_or_equal_to => :startdate}
   def data=(incoming_file)
     self.binary_data = incoming_file.read
     self.content_type = incoming_file.content_type
