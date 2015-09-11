@@ -1,0 +1,24 @@
+<p id="notice">
+	<%= notice %>
+</p>
+
+<p>
+	<strong>Description:</strong>
+	<%= @photo.description %>
+</p>
+
+<p>
+	<strong>Content type:</strong>
+	<%= @photo.content_type %>
+</p>
+
+<p>
+	<strong>Filename:</strong>
+	<%= @photo.filename %>
+</p>
+
+<p>
+	<%= image_tag serve_photo_path(@photo) %>
+</p>
+<%= link_to 'Edit', edit_photo_path(@photo) %> |
+<%= link_to 'Back', photos_path %>
