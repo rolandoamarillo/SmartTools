@@ -31,7 +31,7 @@ class UsersController < ApplicationController
     if @user.save
       log_in @user
       flash[:success] = "Welcome to the SmartTools App!"
-      redirect_back_or user
+      redirect_to @user
     else
       render 'new'
     end
@@ -61,18 +61,6 @@ class UsersController < ApplicationController
     end
   end
 
-  private
-
-  # Use callbacks to share common setup or constraints between actions.
-  def set_user
-    @user = User.find(params[:id])
-  end
-
-  # Never trust parameters from the scary internet, only allow the white list through.
-  def user_params
-    params.require(:user).permit(:username, :name, :lastname, :email, :password, :password_confirmation)
-  end
-
   def logged_in_user
     unless logged_in?
       store_location
@@ -86,4 +74,17 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     redirect_to(root_url) unless current_user?(@user)
   end
+
+  private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def user_params
+    params.require(:user).permit(:username, :name, :lastname, :email, :password, :password_confirmation)
+  end
+
 end

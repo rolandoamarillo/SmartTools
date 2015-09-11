@@ -11,7 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150910133517) do
+ActiveRecord::Schema.define(version: 20150911163753) do
+
+  create_table "contests", force: true do |t|
+    t.string   "name"
+    t.string   "url"
+    t.date     "startdate"
+    t.date     "enddate"
+    t.binary   "binary_data"
+    t.string   "content_type"
+    t.string   "description"
+    t.string   "filename"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "contests", ["user_id", "created_at"], name: "index_contests_on_user_id_and_created_at"
+  add_index "contests", ["user_id"], name: "index_contests_on_user_id"
 
   create_table "photos", force: true do |t|
     t.string   "description"

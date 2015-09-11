@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   before_save { self.email = email.downcase }
+  has_many :contests, dependent: :destroy
   validates :username, presence: true, length: {maximum: 50}, uniqueness: true
   validates :name,  presence: true, length: { maximum: 50 }
   validates :lastname, presence: true, length: {maximum: 50}

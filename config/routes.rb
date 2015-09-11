@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+
+  resources :contests do
+    get "serve", :on => :member
+  end
+  resources :contests
+
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   get 'logout'  => 'sessions#destroy'
