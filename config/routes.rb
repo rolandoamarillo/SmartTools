@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
 
+  resources :videos
+
   resources :contests do
     get "serve", :on => :member
   end
+  
   resources :contests
 
   get    'login'   => 'sessions#new'

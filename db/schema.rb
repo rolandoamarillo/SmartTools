@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150911163753) do
+ActiveRecord::Schema.define(version: 20150914152014) do
 
   create_table "contests", force: true do |t|
     t.string   "name"
@@ -51,5 +51,22 @@ ActiveRecord::Schema.define(version: 20150911163753) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["username"], name: "index_users_on_username", unique: true
+
+  create_table "videos", force: true do |t|
+    t.string   "name"
+    t.string   "lastname"
+    t.string   "email"
+    t.string   "message"
+    t.boolean  "converted",          default: false
+    t.integer  "contest_id"
+    t.string   "video_file_name"
+    t.string   "video_content_type"
+    t.integer  "video_file_size"
+    t.datetime "video_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "videos", ["contest_id"], name: "index_videos_on_contest_id"
 
 end
