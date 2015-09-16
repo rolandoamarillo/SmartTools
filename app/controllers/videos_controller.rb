@@ -1,34 +1,41 @@
 class VideosController < ApplicationController
-  before_action :set_video, only: [:show, :edit, :update, :destroy]
+  #before_action :set_video, only: [:show, :edit, :update, :destroy]
+
+  before_filter :load_parent
 
   # GET /videos
   # GET /videos.json
   def index
-    @videos = Video.all
+    @videos = @contest.videos.all
   end
 
   # GET /videos/1
   # GET /videos/1.json
   def show
+    @video = @contest.videos.find(params[:id])
   end
 
   # GET /videos/new
   def new
-    @video = Video.new
+    @video = @contest.videos.new
   end
 
   # GET /videos/1/edit
   def edit
+    @video = @contest.videos.find(params[:id])
   end
 
   # POST /videos
   # POST /videos.json
   def create
-    @video = Video.new(video_params)
+
+    #@contest = Contest.find(params[:parent_id])
+
+    @video =  @contest.videos.new(video_params)
 
     respond_to do |format|
       if @video.save
-        format.html { redirect_to @video, notice: 'Video was successfully created.' }
+        format.html { redirect_to [@contest,@video] , notice: 'Video was successfully created.' }
         format.json { render :show, status: :created, location: @video }
       else
         format.html { render :new }
@@ -41,8 +48,8 @@ class VideosController < ApplicationController
   # PATCH/PUT /videos/1.json
   def update
     respond_to do |format|
-      if @video.update(video_params)
-        format.html { redirect_to @video, notice: 'Video was successfully updated.' }
+      if @contest.videos.update(video_params)
+        format.html { redirect_to [@contest,@video], notice: 'Video was successfully updated.' }
         format.json { render :show, status: :ok, location: @video }
       else
         format.html { render :edit }
@@ -71,4 +78,7 @@ class VideosController < ApplicationController
     def video_params
       params.require(:video).permit(:name, :lastname, :email, :message, :converted, :contest_id, :video)
     end
+  def load_parent
+    @contest = Contest.find(params[:contest_id])
+  end
 end

@@ -23,7 +23,7 @@ class ContestsController < ApplicationController
   # POST /contests
   # POST /contests.json
   def create
-    @contest = Contest.new(contest_params) do |t|
+    @contest = current_user.contests.new(contest_params) do |t|
       if contest_params[:data]
         contest_params[:data].rewind
         t.binary_data = contest_params[:data].read

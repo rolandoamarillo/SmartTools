@@ -42,6 +42,12 @@
 						<span>Profile</span>
 						<% end %>
 					</li>
+                      <li <% if current_page?(:controller => 'users', :action =>
+                                                                            'index') %> class="first" <% end %>>
+                        <%= link_to(controller:"contests", action: "index" ) do %>
+                        <span>Concursos</span>
+                        <% end %>
+                  </li>
 
 					<li>
 						<%= link_to logout_path, :method => :delete do %>

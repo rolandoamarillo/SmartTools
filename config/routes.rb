@@ -4,6 +4,9 @@ Rails.application.routes.draw do
 
   resources :contests do
     get "serve", :on => :member
+    resources :videos do
+       get 'videos', on: :collection
+     end
   end
   
   resources :contests

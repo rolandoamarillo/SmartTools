@@ -17,7 +17,7 @@
   </thead>
 
   <tbody>
-    <% @videos.each do |video| %>
+    <% @contest.videos.each do |video| %>
       <tr>
         <td><%= video.name %></td>
         <td><%= video.lastname %></td>
@@ -27,8 +27,8 @@
         <td><%= video.contest_id %></td>
         <td><%= video.video %></td>
         <td><%= jwplayer({width: 200, height: 200, file: video.video}) %></td>
-        <td><%= link_to 'Show', video %></td>
-        <td><%= link_to 'Edit', edit_video_path(video) %></td>
+        <td><%= link_to 'Show', [@contest, video] %></td>
+        <td><%= link_to 'Edit', edit_contest_video_path(@contest, video) %></td>
         <td><%= link_to 'Destroy', video, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -37,4 +37,4 @@
 
 <br>
 
-<%= link_to 'New Video', new_video_path %>
+<%= link_to 'New Video', new_contest_video_path(@contest) %>
